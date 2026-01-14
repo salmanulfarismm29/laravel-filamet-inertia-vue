@@ -15,7 +15,6 @@ const navigationItems = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -142,7 +141,7 @@ export function MobileMenu({ isOpen, onClose }) {
     }, 300);
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    
+
     return () => {
       clearTimeout(enableTimeoutId);
       window.removeEventListener("scroll", handleScroll);
@@ -185,7 +184,7 @@ export function MobileMenu({ isOpen, onClose }) {
             <div className="absolute inset-0 bg-brand-primary" />
 
             {/* Pattern overlay with low opacity */}
-            <div 
+            <div
               className="absolute inset-0 pointer-events-none"
               style={{
                 backgroundImage: "url('/patterns/Fagnus_Pattern.svg')",
@@ -207,7 +206,7 @@ export function MobileMenu({ isOpen, onClose }) {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20">
                 {/* Left Column - Navigation - Full width */}
                 <nav className="space-y-3 md:space-y-4 lg:space-y-5">
-                  <motion.span 
+                  <motion.span
                     variants={itemVariants}
                     className="block text-xs uppercase tracking-widest text-white/60 mb-4"
                   >
@@ -235,7 +234,7 @@ export function MobileMenu({ isOpen, onClose }) {
 
                 {/* Right Column - Businesses/Services - Full width on desktop */}
                 <div className="hidden lg:block space-y-4 lg:space-y-5">
-                  <motion.span 
+                  <motion.span
                     variants={itemVariants}
                     className="block text-xs uppercase tracking-widest text-white/60 mb-4"
                   >
@@ -273,7 +272,7 @@ export function MobileMenu({ isOpen, onClose }) {
               </div>
 
               {/* Footer - Copyright inside menu */}
-              <motion.div 
+              <motion.div
                 variants={itemVariants}
                 className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-white/20"
               >
