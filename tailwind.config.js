@@ -1,14 +1,23 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-    content: [
-        "./resources/**/*.blade.php",
-        "./resources/**/*.{vue,js,ts}",
-        "./resources/**/*.{js,ts}",
-        "./app/Filament/**/*.{php,blade}",
-        "./vendor/filament/**/*.blade.php",
-    ],
-    theme: {
-        extend: {},
+import { defineConfig } from 'tailwindcss'
+
+export default defineConfig({
+  content: [
+    './resources/views/**/*.blade.php',
+    './resources/js/**/*.jsx',
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        eina: ['Eina04', 'sans-serif'], // like "var(--font-eina)" in Next.js
+      },
+      colors: {
+        brand: {
+          primary: '#yourPrimaryColor',
+          secondary: '#yourSecondaryColor',
+          accent: '#yourAccentColor',
+        },
+      },
     },
-    plugins: [],
-}
+  },
+  plugins: [],
+})
