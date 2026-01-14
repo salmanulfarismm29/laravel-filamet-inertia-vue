@@ -1,4 +1,4 @@
-import { Colors } from "../Utils/colors";
+import { Colors } from "../../Utils/colors";
 
 export function ColorTest() {
   return (
