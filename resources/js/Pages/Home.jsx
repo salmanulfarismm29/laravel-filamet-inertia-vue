@@ -1,8 +1,12 @@
 import StoryParallax from '@/Sections/StoryParallax';
+import { ColorTest } from '@/Components/Shared/ColorTest';
 
 export default function Home() {
   return (
     <>
+      {/* Color Test Section */}
+      <ColorTest />
+      
       {/* Hero Section - Light off-white background */}
       <section className="min-h-screen flex items-center justify-center bg-[#f8f8f8]">
         <div className="text-center px-6 py-32">

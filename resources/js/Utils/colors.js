@@ -41,19 +41,30 @@ export const getColor = (colorName, shade = null) => {
   return Colors[colorName] || '#000000';
 };
 
+// Note: These are kept for backward compatibility
+// Actual Tailwind classes use the flattened structure from tailwind.config.js
 export const brandColors = {
-  primary: Colors.primary,
-  'primary-dark': Colors.primaryDark,
-  'primary-light': Colors.primaryLight,
-  secondary: Colors.secondary,
-  'secondary-dark': Colors.secondaryDark,
-  'secondary-light': Colors.secondaryLight,
-  accent: Colors.accent,
-  'accent-dark': Colors.accentDark,
-  'accent-light': Colors.accentLight,
-  success: Colors.success,
-  warning: Colors.warning,
-  error: Colors.error,
+  primary: '#EB5326',
+  'primary-dark': '#C1431F',
+  'primary-light': '#F69682',
+  secondary: '#1E293B',
+  'secondary-dark': '#0F172A',
+  'secondary-light': '#334155',
+  accent: '#F5A623',
+  'accent-dark': '#D4881C',
+  'accent-light': '#FFBE4D',
+  success: '#22C55E',
+  warning: '#F59E0B',
+  error: '#EF4444',
+  'neutral-100': '#F8FAFC',
+  'neutral-200': '#F1F5F9',
+  'neutral-300': '#E2E8F0',
+  'neutral-400': '#CBD5E1',
+  'neutral-500': '#94A3B8',
+  'neutral-600': '#64748B',
+  'neutral-700': '#475569',
+  'neutral-800': '#334155',
+  'neutral-900': '#1E293B',
 };
 
 // Export for direct Tailwind usage
