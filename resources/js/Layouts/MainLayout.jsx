@@ -8,17 +8,17 @@ import { Footer } from '@/Components/Footer/Footer';
  * @param {Object} props
  * @param {React.ReactNode} props.children - Page content
  */
-export default function AppLayout({ children }) {
+export default function MainLayout({ children }) {
   return (
     <div className="min-h-screen font-eina bg-white text-black antialiased">
       {/* Global navigation */}
       <Navbar isPageLoaded={true} />
-      
+
       {/* Main content area */}
       <main>
         {children}
       </main>
-      
+
       {/* Global footer */}
       <Footer />
     </div>
