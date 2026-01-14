@@ -1,6 +1,5 @@
-import { defineConfig } from 'tailwindcss'
-
-export default defineConfig({
+/** @type {import('tailwindcss').Config} */
+export default {
   content: [
     './resources/views/**/*.blade.php',
     './resources/js/**/*.jsx',
@@ -40,4 +39,4 @@ export default defineConfig({
     },
   },
   plugins: [],
-})
+}

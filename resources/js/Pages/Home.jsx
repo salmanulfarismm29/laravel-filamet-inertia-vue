@@ -4,9 +4,9 @@ export default function Home() {
   return (
     <>
       {/* Hero Section - Light off-white background */}
-      <section className="min-h-screen flex items-center justify-center bg-[#f8f8f8]">
+      <section className="min-h-screen flex items-center justify-center bg-brand-neutral-100">
         <div className="text-center px-6 py-32">
-          <h1 className="font-eina font-bold text-5xl md:text-7xl lg:text-8xl text-black mb-6 tracking-tight">
+          <h1 className="font-eina font-bold text-5xl md:text-7xl lg:text-8xl text-brand-neutral-900 mb-6 tracking-tight">
             Driven by Expertise,
             <br />
             <span className="text-brand-primary">Defined by Quality</span>
@@ -22,9 +22,9 @@ export default function Home() {
       <StoryParallax />
 
       {/* About Section - Light gray background */}
-      <section className="min-h-screen flex items-center justify-center bg-[#f8f8f8] py-20">
+      <section className="min-h-screen flex items-center justify-center bg-brand-neutral-100 py-20">
         <div className="max-w-4xl mx-auto text-center px-6 lg:px-12">
-          <h2 className="font-eina font-semibold text-4xl md:text-5xl lg:text-6xl text-black mb-8 tracking-tight">
+          <h2 className="font-eina font-semibold text-4xl md:text-5xl lg:text-6xl text-brand-neutral-900 mb-8 tracking-tight">
             About Fagnus
           </h2>
           <p className="font-eina font-light text-lg md:text-xl text-brand-neutral-700 leading-relaxed mb-6">
@@ -40,7 +40,7 @@ export default function Home() {
       </section>
 
       {/* Call to Action Section - Dark section for contrast */}
-      <section className="min-h-[60vh] flex items-center justify-center bg-black py-20">
+      <section className="min-h-[60vh] flex items-center justify-center bg-brand-secondary-dark py-20">
         <div className="max-w-4xl mx-auto text-center px-6 lg:px-12">
           <h2 className="font-eina font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-8 tracking-tight">
             Ready to Transform Your Space?

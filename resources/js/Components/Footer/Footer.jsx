@@ -40,7 +40,7 @@ const services = [
 
 export function Footer() {
   return (
-    <footer className="relative w-full bg-[#080808] text-white pt-24 pb-12 overflow-hidden border-t border-white/5">
+    <footer className="relative w-full bg-brand-secondary-dark text-white pt-24 pb-12 overflow-hidden border-t border-white/5">
       {/* Pattern Overlay */}
       <div
         className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"

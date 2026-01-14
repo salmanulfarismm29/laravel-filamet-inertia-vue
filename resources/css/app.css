@@ -1,18 +1,44 @@
 @import 'tailwindcss';
 @import './fonts.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+@source '../**/*.jsx';
 
 @theme {
+    /* Font Family */
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    
+    /* Brand Colors */
+    --color-brand-primary: #EB5326;
+    --color-brand-primary-dark: #C1431F;
+    --color-brand-primary-light: #F69682;
+    
+    --color-brand-secondary: #1E293B;
+    --color-brand-secondary-dark: #0F172A;
+    --color-brand-secondary-light: #334155;
+    
+    --color-brand-accent: #F5A623;
+    --color-brand-accent-dark: #D4881C;
+    --color-brand-accent-light: #FFBE4D;
+    
+    --color-brand-success: #22C55E;
+    --color-brand-warning: #F59E0B;
+    --color-brand-error: #EF4444;
+    
+    /* Neutral Scale */
+    --color-brand-neutral-100: #F8FAFC;
+    --color-brand-neutral-200: #F1F5F9;
+    --color-brand-neutral-300: #E2E8F0;
+    --color-brand-neutral-400: #CBD5E1;
+    --color-brand-neutral-500: #94A3B8;
+    --color-brand-neutral-600: #64748B;
+    --color-brand-neutral-700: #475569;
+    --color-brand-neutral-800: #334155;
+    --color-brand-neutral-900: #1E293B;
 }
 
 body {
