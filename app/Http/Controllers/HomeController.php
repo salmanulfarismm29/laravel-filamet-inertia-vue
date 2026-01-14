@@ -16,5 +16,21 @@ class HomeController extends Controller
 
         return Inertia::render('Home');
     }
+
+    public function colors()
+    {
+        SEOTools::setTitle('FAGNUS | Color Palette Test');
+        SEOTools::setDescription('Test page for verifying all brand colors are properly configured.');
+
+        return Inertia::render('Tests/Colors');
+    }
+
+    public function fonts()
+    {
+        SEOTools::setTitle('FAGNUS | Font Test');
+        SEOTools::setDescription('Test page for verifying Eina04 font weights and styles.');
+
+        return Inertia::render('Tests/Fonts');
+    }
 }
 
