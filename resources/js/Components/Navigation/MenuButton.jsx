@@ -35,7 +35,6 @@ export function MenuButton({ isOpen, onClick, isDisabled = false }) {
         py-2.5 px-4 md:py-3 md:px-5 rounded-md
         font-eina font-medium text-sm
         transition-colors duration-200
-        hover:bg-brand-primary-dark
         outline-none focus:outline-none
         select-none
         ${isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
@@ -73,7 +72,7 @@ export function MenuButton({ isOpen, onClick, isDisabled = false }) {
           className="absolute w-full h-[2px] bg-white rounded-full"
           style={{ transformOrigin: "center" }}
         />
-        
+
         {/* Middle line */}
         <motion.span
           initial={false}
@@ -84,7 +83,7 @@ export function MenuButton({ isOpen, onClick, isDisabled = false }) {
           transition={{ duration: duration * 0.5, ease: easing }}
           className="absolute w-full h-[2px] bg-white rounded-full"
         />
-        
+
         {/* Bottom line */}
         <motion.span
           initial={false}
