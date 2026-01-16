@@ -6,13 +6,13 @@ import { createRoot } from 'react-dom/client'
 import { InertiaProgress } from '@inertiajs/progress'
 import MainLayout from '@/Layouts/MainLayout'
 
+InertiaProgress.init({
+  color: '#2563eb',
+  includeCSS: true,
+  showSpinner: true,
+})
+
 createInertiaApp({
-  progress: {
-    delay: 200,
-    color: '#EB5326', // Use brand primary color
-    includeCSS: true,
-    showSpinner: true,
-  },
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
     const page = pages[`./Pages/${name}.jsx`]
@@ -29,12 +29,6 @@ createInertiaApp({
     pageComponent.layout = pageComponent.layout || ((page) => <MainLayout>{page}</MainLayout>)
 
     return pageComponent
-  },
-  progress: {
-    delay: 200,
-    color: '#EB5326', // Use brand primary color
-    includeCSS: true,
-    showSpinner: true,
   },
   setup({ el, App, props }) {
     createRoot(el).render(<App {...props} />)
