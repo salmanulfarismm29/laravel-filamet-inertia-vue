@@ -86,12 +86,12 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <a
+            <Link
               href="/services"
               className="inline-block bg-brand-primary hover:bg-brand-primary-dark text-white font-eina font-semibold text-lg px-10 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Explore Services
-            </a>
+            </Link>
           </motion.div>
         </div>
       </section>
