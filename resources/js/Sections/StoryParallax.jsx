@@ -82,14 +82,18 @@ export default function StoryParallax() {
   useEffect(() => {
     if (!sectionRef.current || !imagesLoaded) return;
 
+    // Store reference for cleanup
+    let scrollTriggerInstance = null;
+
     const ctx = gsap.context(() => {
       // Pin the section and scrub through frames
-      ScrollTrigger.create({
+      scrollTriggerInstance = ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
         end: "+=300%",
         pin: true,
         scrub: 1,
+        anticipatePin: 1, // Helps with smoother pinning
         onUpdate: (self) => {
           // Calculate current frame based on scroll progress
           const frameIndex = Math.min(
@@ -101,7 +105,16 @@ export default function StoryParallax() {
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      // Kill the specific ScrollTrigger instance first
+      if (scrollTriggerInstance) {
+        scrollTriggerInstance.kill();
+      }
+      // Then revert the GSAP context
+      ctx.revert();
+      // Refresh remaining ScrollTriggers
+      ScrollTrigger.refresh();
+    };
   }, [imagesLoaded]);
 
   // Draw current frame on canvas
