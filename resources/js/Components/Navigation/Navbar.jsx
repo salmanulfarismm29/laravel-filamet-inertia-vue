@@ -55,11 +55,7 @@ export function Navbar({ isPageLoaded = true }) {
     setIsMenuOpen(false);
   };
 
-  // Smooth scroll to top
-  const handleLogoClick = (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+
 
   return (
     <>
@@ -72,7 +68,6 @@ export function Navbar({ isPageLoaded = true }) {
       >
         <Link
           href="/"
-          onClick={handleLogoClick}
           className="block outline-none focus:outline-none select-none"
           aria-label="Fagnus Home"
           style={{ WebkitTapHighlightColor: "transparent" }}

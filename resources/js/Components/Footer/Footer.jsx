@@ -26,16 +26,16 @@ const footerLinks = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
   { name: "About", href: "/about" },
-  { name: "Projects", href: "/projects" },
+  { name: "Projects", href: "/gallery" },
   { name: "Contact", href: "/contact" },
 ];
 
 const services = [
-  "CCTV Installation & Services",
-  "Solar Solutions",
-  "Automatic Gate Systems",
-  "Fingerprint Lock Systems",
-  "Laptop & PC Repair Services",
+  { name: "CCTV Installation & Services", href: "/services/cctv-installation" },
+  { name: "Solar Energy Solutions", href: "/services/solar-solutions" },
+  { name: "Automatic Gate Systems", href: "/services/automatic-gate-systems" },
+  { name: "Fingerprint Lock Systems", href: "/services/fingerprint-lock-systems" },
+  { name: "Laptop & PC Repair Services", href: "/services/laptop-pc-repair" },
 ];
 
 export function Footer() {
@@ -108,13 +108,13 @@ export function Footer() {
             </h3>
             <ul className="flex flex-col gap-4">
               {services.map((service) => (
-                <li key={service}>
+                <li key={service.name}>
                   <Link
-                    href="/services"
+                    href={service.href}
                     className="group flex items-start text-lg font-eina font-light text-neutral-300 hover:text-brand-primary transition-colors"
                   >
                     <span className="cursor-pointer transition-transform duration-300 group-hover:translate-x-1">
-                      {service}
+                      {service.name}
                     </span>
                   </Link>
                 </li>

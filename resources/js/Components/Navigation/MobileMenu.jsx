@@ -14,6 +14,7 @@ import { Z_INDEX } from "../../Utils/constants";
 const navigationItems = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
+  { label: "Projects", href: "/gallery" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -23,17 +24,16 @@ const businessItems = [
   {
     category: "Security Solutions",
     items: [
-      { label: "CCTV Installation", href: "/services/cctv" },
-      { label: "Fingerprint Locks", href: "/services/fingerprint" },
-      { label: "Automatic Gates", href: "/services/gates" },
+      { label: "CCTV Installation", href: "/services/cctv-installation" },
+      { label: "Fingerprint Locks", href: "/services/fingerprint-lock-systems" },
+      { label: "Automatic Gates", href: "/services/automatic-gate-systems" },
     ],
   },
   {
     category: "Energy & Tech",
     items: [
-      { label: "Solar Solutions", href: "/services/solar" },
-      { label: "AC Services", href: "/services/ac" },
-      { label: "PC Sales & Repair", href: "/services/pc" },
+      { label: "Solar Solutions", href: "/services/solar-solutions" },
+      { label: "PC Repair", href: "/services/laptop-pc-repair" },
     ],
   },
 ];
