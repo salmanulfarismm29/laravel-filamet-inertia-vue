@@ -11,23 +11,47 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
   
-  // Disable browser's automatic scroll restoration
+  // Handle scroll restoration behavior
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual'
   }
+  
+  // Scroll to top on initial page load
+  window.addEventListener('load', () => {
+    // Small timeout to ensure DOM is ready
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 1);
+  });
 }
 
 // Force scroll to top helper
-const forceScrollReset = () => {
+const forceScrollReset = (immediate = false) => {
   // Use GSAP's scroll setter for compatibility with ScrollTrigger
   const scrollFunc = ScrollTrigger.getScrollFunc(window)
   if (scrollFunc) {
     scrollFunc(0)
   }
   // Also use native methods as fallback
-  window.scrollTo(0, 0)
-  document.documentElement.scrollTop = 0
-  document.body.scrollTop = 0
+  if (immediate) {
+    window.scrollTo(0, 0)
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  } else {
+    // For smoother behavior, especially on page load
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+  }
+}
+
+// Handle initial page load (refresh case)
+// Check if this is a fresh page load vs. Inertia navigation
+if (document.readyState === 'loading' || document.readyState === 'interactive') {
+  document.addEventListener('DOMContentLoaded', () => {
+    forceScrollReset(true)
+  })
+} else {
+  // DOM already loaded
+  forceScrollReset(true)
 }
 
 // Clean up GSAP ScrollTrigger on Inertia navigation
