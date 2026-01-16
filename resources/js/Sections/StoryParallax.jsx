@@ -94,8 +94,7 @@ export default function StoryParallax() {
         end: "+=300%",
         pin: true,
         pinSpacing: true,
-        scrub: 1,
-        anticipatePin: 1,
+        scrub: 0.5, // Faster response for smoother feel
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const frameIndex = Math.min(
@@ -105,7 +104,6 @@ export default function StoryParallax() {
           setCurrentFrame(frameIndex);
         },
         onLeave: () => {
-          // Reset state when leaving the pinned section
           setCurrentFrame(STORY_FRAMES.length - 1);
         },
         onLeaveBack: () => {
@@ -196,7 +194,7 @@ export default function StoryParallax() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-screen bg-black overflow-hidden"
+      className="relative w-full h-screen bg-black"
     >
       {/* Background Pattern with Parallax */}
       <motion.div
@@ -219,7 +217,7 @@ export default function StoryParallax() {
       />
 
       {/* Canvas for Image Sequence */}
-      <div className="sticky top-0 w-full h-screen">
+      <div className="absolute inset-0 w-full h-full">
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full object-cover"
@@ -301,15 +299,6 @@ export default function StoryParallax() {
           </motion.div>
         )}
       </div>
-
-      {/* Reduced Motion Fallback */}
-      <style jsx>{`
-        @media (prefers-reduced-motion: reduce) {
-          canvas {
-            animation: none !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

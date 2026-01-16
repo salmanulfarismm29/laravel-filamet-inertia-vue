@@ -97,7 +97,6 @@ export default function Home() {
       </section>
 
       {/* Cinematic Story Parallax Section */}
-      {/* Cinematic Story Parallax Section */}
       <StoryParallax />
 
       {/* Services Preview */}
