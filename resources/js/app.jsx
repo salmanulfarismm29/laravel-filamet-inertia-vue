@@ -10,27 +10,56 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
+  
+  // Disable browser's automatic scroll restoration
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual'
+  }
+}
+
+// Force scroll to top helper
+const forceScrollReset = () => {
+  // Use GSAP's scroll setter for compatibility with ScrollTrigger
+  const scrollFunc = ScrollTrigger.getScrollFunc(window)
+  if (scrollFunc) {
+    scrollFunc(0)
+  }
+  // Also use native methods as fallback
+  window.scrollTo(0, 0)
+  document.documentElement.scrollTop = 0
+  document.body.scrollTop = 0
 }
 
 // Clean up GSAP ScrollTrigger on Inertia navigation
-// This fixes blank page issues when navigating from pages with pinned sections
 router.on('before', () => {
-  // Kill all ScrollTriggers before navigation
-  ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-  // Clear any pinned elements
+  // First, get all ScrollTriggers and kill them with full revert
+  const triggers = ScrollTrigger.getAll()
+  triggers.forEach(trigger => {
+    // Disable the trigger first
+    trigger.disable()
+    // Then kill with revert
+    trigger.kill(true)
+  })
+  
+  // Clear scroll memory
   ScrollTrigger.clearScrollMemory()
-  // Reset scroll position memory
-  if (typeof window !== 'undefined') {
-    window.scrollTo(0, 0)
-  }
+  ScrollTrigger.clearMatchMedia()
+  
+  // Force scroll reset
+  forceScrollReset()
 })
 
-// Refresh ScrollTrigger after navigation completes
+// Reset scroll after navigation
+router.on('success', () => {
+  forceScrollReset()
+})
+
 router.on('finish', () => {
-  // Small delay to ensure DOM is ready
-  setTimeout(() => {
-    ScrollTrigger.refresh()
-  }, 100)
+  // Final scroll reset and refresh
+  requestAnimationFrame(() => {
+    forceScrollReset()
+    ScrollTrigger.refresh(true)
+  })
 })
 
 createInertiaApp({

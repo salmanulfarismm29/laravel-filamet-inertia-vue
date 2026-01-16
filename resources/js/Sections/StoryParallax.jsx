@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { router } from "@inertiajs/react";
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
@@ -92,28 +93,55 @@ export default function StoryParallax() {
         start: "top top",
         end: "+=300%",
         pin: true,
+        pinSpacing: true,
         scrub: 1,
-        anticipatePin: 1, // Helps with smoother pinning
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
-          // Calculate current frame based on scroll progress
           const frameIndex = Math.min(
             Math.floor(self.progress * STORY_FRAMES.length),
             STORY_FRAMES.length - 1
           );
           setCurrentFrame(frameIndex);
         },
+        onLeave: () => {
+          // Reset state when leaving the pinned section
+          setCurrentFrame(STORY_FRAMES.length - 1);
+        },
+        onLeaveBack: () => {
+          setCurrentFrame(0);
+        },
       });
     }, sectionRef);
 
-    return () => {
-      // Kill the specific ScrollTrigger instance first
+    // Cleanup function that properly kills the ScrollTrigger
+    const cleanup = () => {
       if (scrollTriggerInstance) {
-        scrollTriggerInstance.kill();
+        // Disable first, then kill with full revert
+        scrollTriggerInstance.disable();
+        scrollTriggerInstance.kill(true);
+        scrollTriggerInstance = null;
       }
-      // Then revert the GSAP context
+      // Revert GSAP context
       ctx.revert();
-      // Refresh remaining ScrollTriggers
-      ScrollTrigger.refresh();
+      // Clear any remaining scroll memory
+      ScrollTrigger.clearScrollMemory();
+      // Force scroll to top using GSAP's method
+      const scrollFunc = ScrollTrigger.getScrollFunc(window);
+      if (scrollFunc) {
+        scrollFunc(0);
+      }
+      window.scrollTo(0, 0);
+    };
+
+    // Listen to Inertia navigation to cleanup BEFORE navigation starts
+    const removeBeforeListener = router.on('before', () => {
+      cleanup();
+    });
+
+    return () => {
+      removeBeforeListener();
+      cleanup();
     };
   }, [imagesLoaded]);
 
