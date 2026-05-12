@@ -10,16 +10,22 @@ if (typeof window !== "undefined") {
 }
 
 // Story sequence configuration
+// Solar panels is intentionally first — highest business priority.
 const STORY_FRAMES = [
   {
-    image: "/story/story_gate_closed_1766908902408.png",
-    title: "Secure Entry with Automatic Gates",
-    description: "Smart access control begins your journey",
+    image: "/story/story_solar_panels_1766908968215.png",
+    title: "Sustainable Power from the Sun",
+    description: "Harness unlimited clean energy for your home or business",
   },
   {
     image: "/story/story_solar_lights_1766908918173.png",
     title: "Intelligent Solar Street Lighting",
     description: "Illuminating pathways with sustainable energy",
+  },
+  {
+    image: "/story/story_gate_closed_1766908902408.png",
+    title: "Secure Entry with Automatic Gates",
+    description: "Smart access control begins your journey",
   },
   {
     image: "/story/story_smart_home_1766908934818.png",
@@ -30,11 +36,6 @@ const STORY_FRAMES = [
     image: "/story/story_inverter_system_1766908951044.png",
     title: "Advanced Inverter Control",
     description: "Intelligent power management at your fingertips",
-  },
-  {
-    image: "/story/story_solar_panels_1766908968215.png",
-    title: "Sustainable Power from the Sun",
-    description: "Harness unlimited clean energy",
   },
 ];
 

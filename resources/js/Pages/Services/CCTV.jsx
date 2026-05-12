@@ -7,88 +7,88 @@ import CTASection from '@/Components/CTASection';
 const features = [
     {
         title: "HD & 4K Camera Systems",
-        description: "Crystal-clear video quality for detailed surveillance and evidence collection."
+        description: "Crystal-clear video quality for detailed surveillance, identification, and evidence collection.",
     },
     {
         title: "24/7 Remote Monitoring",
-        description: "Access your camera feeds from anywhere via mobile app or web browser."
+        description: "Access your camera feeds from anywhere via mobile app or web browser, any time of day.",
     },
     {
         title: "Night Vision Technology",
-        description: "Advanced infrared cameras for clear footage in complete darkness."
+        description: "Advanced infrared cameras for clear, detailed footage in complete darkness.",
     },
     {
         title: "Motion Detection Alerts",
-        description: "Instant notifications when movement is detected in monitored areas."
+        description: "Instant push notifications when movement is detected in monitored areas.",
     },
     {
         title: "Cloud & Local Storage",
-        description: "Flexible recording options with secure backup solutions."
+        description: "Flexible recording options with both on-site NVR/DVR storage and cloud backup.",
     },
     {
         title: "Professional Installation",
-        description: "Expert setup ensuring optimal camera placement and coverage."
+        description: "Expert camera placement for optimal coverage with minimal blind spots.",
     },
 ];
 
 const processSteps = [
     {
         title: "Site Assessment",
-        description: "Our experts visit your property to identify vulnerable areas and recommend optimal camera placements."
+        description: "Our experts visit your property to identify vulnerable areas and recommend optimal camera placement.",
     },
     {
         title: "Custom System Design",
-        description: "We design a tailored CCTV solution based on your security needs and budget."
+        description: "We design a tailored CCTV solution based on your security needs, property layout, and budget.",
     },
     {
         title: "Professional Installation",
-        description: "Certified technicians install cameras with minimal disruption to your operations."
+        description: "Certified technicians install cameras with minimal disruption to your day-to-day operations.",
     },
     {
         title: "System Configuration",
-        description: "Complete setup of recording, remote access, and notification systems."
+        description: "Complete setup of recording schedules, remote access, and motion detection notifications.",
     },
     {
         title: "Training & Support",
-        description: "Comprehensive training on system operation with ongoing technical support."
+        description: "Full user training on system operation with ongoing technical support and maintenance contracts.",
     },
 ];
 
 const useCases = [
     {
         title: "Residential Security",
-        description: "Protect your home and family with comprehensive surveillance coverage of entry points, driveways, and perimeter areas."
+        description: "Protect your home and family with comprehensive coverage of entry points, driveways, and perimeter areas.",
     },
     {
         title: "Commercial Properties",
-        description: "Secure retail stores, offices, and warehouses with advanced monitoring to prevent theft and ensure employee safety."
+        description: "Secure retail stores, offices, and warehouses with advanced monitoring to prevent theft and ensure staff safety.",
     },
     {
         title: "Industrial Facilities",
-        description: "Monitor large-scale operations, equipment, and restricted areas with robust camera systems built for demanding environments."
+        description: "Monitor large-scale operations, equipment areas, and restricted zones with robust, weatherproof camera systems.",
     },
 ];
 
 const faqs = [
     {
-        question: "How many cameras do I need for my property?",
-        answer: "The number of cameras depends on your property size, layout, and security concerns. During our site assessment, we'll recommend optimal camera placement to ensure complete coverage of critical areas while staying within your budget."
+        question: "How many cameras do I need?",
+        answer: "The number depends on your property size, layout, and specific security concerns. During our site assessment, we'll recommend optimal camera count and placement to ensure complete coverage within your budget.",
     },
     {
-        question: "Can I view camera feeds from my smartphone?",
-        answer: "Yes! All our modern CCTV systems include mobile app access, allowing you to view live feeds, playback recordings, and receive alerts from anywhere in the world with an internet connection."
+        question: "Can I view footage from my smartphone?",
+        answer: "Yes. All our CCTV systems include mobile app access for live viewing, playback, and alerts — from anywhere in the world with an internet connection.",
     },
     {
-        question: "How long is video footage stored?",
-        answer: "Storage duration depends on your recording quality settings and storage capacity. Typically, we configure systems to store 7-30 days of footage. We offer both local storage (DVR/NVR) and cloud backup options."
-    },
-    {
-        question: "Do you provide installation and maintenance?",
-        answer: "Absolutely! We provide complete end-to-end service including professional installation, system configuration, user training, and ongoing maintenance support to ensure your system operates flawlessly."
+        question: "How long is footage stored?",
+        answer: "Storage duration depends on recording quality and storage capacity. We typically configure 7–30 days of footage. We offer both local DVR/NVR storage and cloud backup options.",
     },
     {
         question: "What happens if the internet goes down?",
-        answer: "Our systems continue recording to local storage (DVR/NVR) even without internet. You'll only lose remote viewing capability during an outage. Once reconnected, you can access all recorded footage."
+        answer: "Your system continues recording to local storage (DVR/NVR) regardless of internet connectivity. You'll only lose remote viewing during an outage — all footage remains safely stored locally.",
+    },
+    {
+        question: "Do you provide ongoing maintenance?",
+        answer: "Yes. We offer annual maintenance contracts including camera cleaning, system health checks, firmware updates, and priority technical support.",
     },
 ];
 
@@ -96,17 +96,20 @@ export default function CCTV() {
     return (
         <>
             <Head>
-                <title>CCTV Installation & Services - FAGNUS</title>
-                <meta name="description" content="Professional CCTV camera installation with HD quality, 24/7 monitoring, night vision, and remote access. Protect your property with advanced surveillance systems." />
+                <title>CCTV Surveillance Systems - FAGNUS</title>
+                <meta
+                    name="description"
+                    content="Installation and maintenance of high-quality CCTV security camera systems for complete monitoring and protection. HD, 4K, and night-vision surveillance for homes and businesses."
+                />
             </Head>
 
-            {/* Hero Section */}
+            {/* Hero */}
             <section className="pt-32 pb-20 bg-gradient-to-br from-brand-neutral-100 to-white">
                 <div className="max-w-5xl mx-auto px-6 lg:px-12">
                     <SectionHeader
-                        tag="Security Solutions"
-                        title="CCTV Installation & Services"
-                        description="Advanced surveillance systems that provide complete security coverage with crystal-clear footage, intelligent alerts, and 24/7 remote monitoring capabilities."
+                        tag="ELV Solutions"
+                        title="CCTV Surveillance Systems"
+                        description="Advanced surveillance systems that provide complete security coverage with crystal-clear footage, intelligent motion alerts, and 24/7 remote monitoring capabilities."
                     />
                     <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                         <a
@@ -125,13 +128,13 @@ export default function CCTV() {
                 </div>
             </section>
 
-            {/* What We Offer */}
+            {/* Features */}
             <section className="py-20 bg-white">
                 <div className="max-w-6xl mx-auto px-6 lg:px-12">
                     <SectionHeader
                         subtitle="What We Offer"
                         title="Comprehensive CCTV Solutions"
-                        description="State-of-the-art surveillance technology tailored to your security needs."
+                        description="State-of-the-art surveillance technology tailored to your security requirements."
                     />
                     <div className="mt-16">
                         <FeatureList features={features} columns={3} />
@@ -139,13 +142,13 @@ export default function CCTV() {
                 </div>
             </section>
 
-            {/* Process Steps */}
+            {/* Process */}
             <section className="py-20 bg-brand-neutral-100">
                 <div className="max-w-6xl mx-auto px-6 lg:px-12">
                     <SectionHeader
                         subtitle="Our Process"
                         title="How We Install Your CCTV System"
-                        description="A systematic approach ensuring optimal security coverage and system performance."
+                        description="A systematic five-step approach ensuring optimal coverage and reliable system performance."
                     />
                     <div className="mt-16">
                         <FeatureList features={processSteps} columns={2} />
@@ -159,7 +162,7 @@ export default function CCTV() {
                     <SectionHeader
                         subtitle="Applications"
                         title="Perfect for Every Property Type"
-                        description="Scalable security solutions designed for diverse environments."
+                        description="Scalable security solutions designed for diverse residential and commercial environments."
                     />
                     <div className="mt-16">
                         <FeatureList features={useCases} columns={3} />
@@ -167,13 +170,13 @@ export default function CCTV() {
                 </div>
             </section>
 
-            {/* FAQ Section */}
+            {/* FAQ */}
             <section className="py-20 bg-brand-neutral-100">
                 <div className="max-w-6xl mx-auto px-6 lg:px-12">
                     <SectionHeader
                         subtitle="FAQ"
                         title="Frequently Asked Questions"
-                        description="Everything you need to know about our CCTV installation services."
+                        description="Everything you need to know about CCTV installation and surveillance systems."
                     />
                     <div className="mt-16">
                         <FAQ faqs={faqs} />
@@ -181,10 +184,10 @@ export default function CCTV() {
                 </div>
             </section>
 
-            {/* CTA Section */}
+            {/* CTA */}
             <CTASection
                 title="Ready to Secure Your Property?"
-                description="Get a free consultation and custom quote for your CCTV installation today."
+                description="Get a free consultation and custom quote for your CCTV surveillance system today."
                 primaryButtonText="Schedule Consultation"
                 primaryButtonHref="/contact"
             />

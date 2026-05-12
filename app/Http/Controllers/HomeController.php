@@ -14,7 +14,27 @@ class HomeController extends Controller
             'FAGNUS provides renewable energy solutions, security camera systems, and PC & laptop repair services.'
         );
 
-        return Inertia::render('Home');
+        // Fetch the 6 most recent published gallery items for the portfolio section
+        $galleryItems = \App\Models\GalleryItem::published()
+            ->with('media')
+            ->orderBy('sort_order')
+            ->take(6)
+            ->get()
+            ->map(fn (\App\Models\GalleryItem $item) => [
+                'id'          => $item->id,
+                'title'       => $item->title,
+                'description' => $item->description,
+                'images'      => $item->getMedia('projects')->map(fn ($media) => [
+                    'url'       => $media->getUrl(),
+                    'thumb'     => $media->getUrl('thumb'),
+                    'medium'    => $media->getUrl('medium'),
+                    'alt'       => $item->title,
+                ]),
+            ]);
+
+        return Inertia::render('Home', [
+            'galleryItems' => $galleryItems,
+        ]);
     }
 
     public function colors()

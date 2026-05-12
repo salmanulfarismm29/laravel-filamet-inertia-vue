@@ -31,11 +31,11 @@ const footerLinks = [
 ];
 
 const services = [
-  { name: "CCTV Installation & Services", href: "/services/cctv-installation" },
-  { name: "Solar Energy Solutions", href: "/services/solar-solutions" },
-  { name: "Automatic Gate Systems", href: "/services/automatic-gate-systems" },
-  { name: "Fingerprint Lock Systems", href: "/services/fingerprint-lock-systems" },
-  { name: "Laptop & PC Repair Services", href: "/services/laptop-pc-repair" },
+  { name: "Solar Energy Solutions",       href: "/services/solar-power-systems" },
+  { name: "CCTV Surveillance Systems",    href: "/services/cctv-surveillance" },
+  { name: "Automatic Gate Systems",       href: "/services/automatic-gate-systems" },
+  { name: "Fingerprint Lock Systems",     href: "/services/access-control" },
+  { name: "Laptop & PC Repair Services", href: "/services/laptop-desktop-systems" },
 ];
 
 export function Footer() {
@@ -209,20 +209,6 @@ export function Footer() {
           <p className="text-neutral-500 text-sm font-eina">
             © {new Date().getFullYear()} Fagnus. All rights reserved.
           </p>
-          <div className="flex gap-8">
-            <Link
-              href="/privacy"
-              className="text-neutral-500 hover:text-white text-sm transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-neutral-500 hover:text-white text-sm transition-colors"
-            >
-              Terms of Use
-            </Link>
-          </div>
         </motion.div>
       </div>
     </footer>

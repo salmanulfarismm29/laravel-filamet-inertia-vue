@@ -3,6 +3,7 @@ import { Arrow } from "../UI/Arrow";
 import { Link } from "@inertiajs/react";
 import { useEffect } from "react";
 import { Z_INDEX } from "../../Utils/constants";
+import { NAVBAR_CATEGORIES } from "../../Utils/services";
 
 /**
  * @typedef {Object} MobileMenuProps
@@ -19,33 +20,16 @@ const navigationItems = [
   { label: "Contact", href: "/contact" },
 ];
 
-// Business/Services items for right column (Hut8-style)
-const businessItems = [
-  {
-    category: "Security Solutions",
-    items: [
-      { label: "CCTV Installation", href: "/services/cctv-installation" },
-      { label: "Fingerprint Locks", href: "/services/fingerprint-lock-systems" },
-      { label: "Automatic Gates", href: "/services/automatic-gate-systems" },
-    ],
-  },
-  {
-    category: "Energy & Tech",
-    items: [
-      { label: "Solar Solutions", href: "/services/solar-solutions" },
-      { label: "PC Repair", href: "/services/laptop-pc-repair" },
-    ],
-  },
-];
-
 /**
- * Hut8-style mega menu with slide-down animation
- * 
- * Animation specs:
- * - Panel: y: -100% → 0, duration 0.5s, spring(damping: 25, stiffness: 200)
- * - Backdrop: fade in with blur
- * - Items: stagger reveal (0.05s delay each, y: 30 → 0, opacity: 0 → 1)
- * 
+ * Hut8-style mega menu with slide-down animation.
+ *
+ * Right column shows "Our Services" grouped into 3 categories:
+ *  - Solar & Energy (first — business priority)
+ *  - ELV & Security
+ *  - IT & Hardware
+ *
+ * Data is sourced from Utils/services.js (single source of truth).
+ *
  * @param {MobileMenuProps} props
  */
 export function MobileMenu({ isOpen, onClose }) {
@@ -177,7 +161,7 @@ export function MobileMenu({ isOpen, onClose }) {
             }}
             className="fixed top-0 left-0 right-0 z-[60] w-full overflow-y-auto"
             style={{
-              maxHeight: "70vh",
+              maxHeight: "80vh",
             }}
           >
             {/* Solid background layer - Primary Orange */}
@@ -194,7 +178,7 @@ export function MobileMenu({ isOpen, onClose }) {
               }}
             />
 
-            {/* Content container - Full width usage */}
+            {/* Content container */}
             <motion.div
               variants={containerVariants}
               initial="closed"
@@ -202,9 +186,10 @@ export function MobileMenu({ isOpen, onClose }) {
               exit="closed"
               className="relative z-10 w-full flex flex-col pt-20 md:pt-24 pb-6 md:pb-8 px-6 md:px-10 lg:px-16 xl:px-20"
             >
-              {/* Two column layout - Full width */}
+              {/* Two column layout */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20">
-                {/* Left Column - Navigation - Full width */}
+
+                {/* Left Column — Primary Navigation */}
                 <nav className="space-y-3 md:space-y-4 lg:space-y-5">
                   <motion.span
                     variants={itemVariants}
@@ -221,7 +206,7 @@ export function MobileMenu({ isOpen, onClose }) {
                       >
                         <span className="relative whitespace-nowrap">
                           {item.label}
-                          {/* Hover underline - white */}
+                          {/* Hover underline */}
                           <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full" />
                         </span>
                         <span className="transform transition-transform duration-300 group-hover:translate-x-2 text-white opacity-0 group-hover:opacity-100 flex-shrink-0">
@@ -232,30 +217,39 @@ export function MobileMenu({ isOpen, onClose }) {
                   ))}
                 </nav>
 
-                {/* Right Column - Businesses/Services - Full width on desktop */}
-                <div className="hidden lg:block space-y-4 lg:space-y-5">
+                {/* Right Column — Our Services (grouped by category) */}
+                <div className="hidden lg:block">
                   <motion.span
                     variants={itemVariants}
-                    className="block text-xs uppercase tracking-widest text-white/60 mb-4"
+                    className="block text-xs uppercase tracking-widest text-white/60 mb-6"
                   >
                     Our Services
                   </motion.span>
-                  <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8 xl:gap-10">
-                    {businessItems.map((category) => (
-                      <motion.div key={category.category} variants={itemVariants}>
-                        <h3 className="text-lg lg:text-xl font-eina font-semibold text-white mb-4">
-                          {category.category}
+
+                  {/*
+                   * Renders the EXACT 3-category structure specified by the client:
+                   *   1. Energy Solutions   (On-Grid, Off-Grid, Hybrid, Water Heater, Inverters)
+                   *   2. ELV Solutions      (CCTV, Networking, Auto Gates, Home Auto, Access Control)
+                   *   3. IT Hardware        (Computers, Laptops, Projectors, Printers)
+                   *
+                   * Data source: NAVBAR_CATEGORIES in Utils/services.js
+                   */}
+                  <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
+                    {NAVBAR_CATEGORIES.map((group) => (
+                      <motion.div key={group.category} variants={itemVariants}>
+                        {/* Category heading */}
+                        <h3 className="text-sm lg:text-base font-eina font-semibold text-white mb-3 border-b border-white/20 pb-2">
+                          {group.category}
                         </h3>
-                        <ul className="space-y-2.5">
-                          {category.items.map((item, idx) => (
-                            <li key={item.label} className="flex items-center gap-2 text-base">
-                              {idx > 0 && (
-                                <span className="text-white/40 flex-shrink-0">|</span>
-                              )}
+
+                        {/* Service links — uses item.label & item.href */}
+                        <ul className="space-y-1.5">
+                          {group.items.map((item) => (
+                            <li key={item.label}>
                               <Link
                                 href={item.href}
                                 onClick={onClose}
-                                className="group inline-flex items-center gap-1 font-eina text-white/80 hover:text-white transition-colors duration-300"
+                                className="group inline-flex items-center gap-1 font-eina text-sm text-white/80 hover:text-white transition-colors duration-300"
                               >
                                 <span className="relative">
                                   {item.label}
@@ -271,7 +265,7 @@ export function MobileMenu({ isOpen, onClose }) {
                 </div>
               </div>
 
-              {/* Footer - Copyright inside menu */}
+              {/* Footer — Copyright inside menu */}
               <motion.div
                 variants={itemVariants}
                 className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-white/20"

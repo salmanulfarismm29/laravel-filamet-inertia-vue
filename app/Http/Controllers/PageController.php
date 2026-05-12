@@ -1,7 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
+use App\Models\ContactMessage;
+use App\Models\GalleryItem;
 use Inertia\Inertia;
 use Artesaos\SEOTools\Facades\SEOTools;
 
@@ -14,11 +18,25 @@ class PageController extends Controller
             'Browse our portfolio of completed projects including CCTV installations, solar energy solutions, automated gates, and more.'
         );
 
-        // TODO: Load images from Filament Gallery model
-        $images = [];
+        // Load published gallery items with their Spatie media,
+        // ordered by sort_order as set by the admin.
+        $galleryItems = GalleryItem::published()
+            ->with('media')
+            ->get()
+            ->map(fn (GalleryItem $item) => [
+                'id'          => $item->id,
+                'title'       => $item->title,
+                'description' => $item->description,
+                'images'      => $item->getMedia('projects')->map(fn ($media) => [
+                    'url'       => $media->getUrl(),
+                    'thumb'     => $media->getUrl('thumb'),
+                    'medium'    => $media->getUrl('medium'),
+                    'alt'       => $item->title,
+                ]),
+            ]);
 
         return Inertia::render('Gallery', [
-            'images' => $images,
+            'galleryItems' => $galleryItems,
         ]);
     }
 
@@ -42,38 +60,23 @@ class PageController extends Controller
         return Inertia::render('Contact');
     }
 
-    public function privacy()
-    {
-        SEOTools::setTitle('Privacy Policy - FAGNUS');
-        SEOTools::setDescription(
-            'FAGNUS Privacy Policy - Learn how we collect, use, and protect your personal information.'
-        );
-
-        return Inertia::render('Legal/Privacy');
-    }
-
-    public function terms()
-    {
-        SEOTools::setTitle('Terms & Conditions - FAGNUS');
-        SEOTools::setDescription(
-            'FAGNUS Terms and Conditions - Read our terms of service for using our website and services.'
-        );
-
-        return Inertia::render('Legal/Terms');
-    }
 
     public function contactSubmit()
     {
-        request()->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:20',
-            'service' => 'nullable|string',
+        $validated = request()->validate([
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email|max:255',
+            'phone'   => 'nullable|string|max:20',
+            'service' => 'nullable|string|max:255',
             'message' => 'required|string|max:1000',
         ]);
 
-        // TODO: Implement email sending or database storage
-        // For now, just return success
+        // Persist the message so the admin can view it in the Filament panel.
+        // The ip_address is captured for spam/abuse tracking.
+        ContactMessage::create([
+            ...$validated,
+            'ip_address' => request()->ip(),
+        ]);
 
         return redirect()->back()->with('success', 'Thank you for contacting us! We will get back to you soon.');
     }

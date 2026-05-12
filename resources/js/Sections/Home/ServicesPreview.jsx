@@ -1,119 +1,151 @@
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import { ALL_SERVICES } from '@/Utils/services';
 
-const services = [
-  {
-    title: "CCTV Solutions",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-      </svg>
-    ),
-    href: "/services/cctv-installation",
-  },
-  {
-    title: "Solar Energy",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-      </svg>
-    ),
-    href: "/services/solar-solutions",
-  },
-  {
-    title: "Automatic Gates",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-      </svg>
-    ),
-    href: "/services/automatic-gate-systems",
-  },
-  {
-    title: "Fingerprint Locks",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
-      </svg>
-    ),
-    href: "/services/fingerprint-lock-systems",
-  },
-  {
-    title: "PC Repair",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-    href: "/services/laptop-pc-repair",
-  },
+/**
+ * ServicesPreview — Homepage section
+ *
+ * Shows 6 prominent services as elevated hover cards.
+ * Service order: Solar Power first (business priority), then CCTV, Networking,
+ * Access Control, Home Automation, Laptop & Desktop.
+ * Driven by ALL_SERVICES from Utils/services.js.
+ *
+ * Card hover effects:
+ *  - Coloured top-border slides in from 0 width
+ *  - Icon background fills with brand-primary colour
+ *  - Card lifts with translateY(-4px) + deeper shadow
+ *  - "Learn More →" arrow slides right on hover
+ */
+
+const FEATURED_SLUGS = [
+    'solar-power-systems',
+    'cctv-surveillance',
+    'structured-cabling-networking',
+    'access-control',
+    'home-automation',
+    'laptop-desktop-systems',
 ];
 
+const featuredServices = FEATURED_SLUGS
+    .map((slug) => ALL_SERVICES.find((s) => s.slug === slug))
+    .filter(Boolean);
+
 export default function ServicesPreview() {
-  return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-eina font-bold text-4xl md:text-5xl lg:text-6xl text-brand-neutral-900 mb-6 tracking-tight"
-          >
-            Our Services
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="font-eina font-light text-lg md:text-xl text-brand-neutral-700 max-w-3xl mx-auto"
-          >
-            Comprehensive technology solutions backed by over two decades of expertise
-          </motion.p>
-        </div>
+    return (
+        <section className="py-20 bg-white">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Link
-                href={service.href}
-                className="group block text-center p-6 rounded-xl border border-brand-neutral-300 hover:border-brand-primary hover:shadow-lg transition-all duration-300"
-              >
-                <div className="mb-4 mx-auto w-16 h-16 rounded-xl bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all duration-300">
-                  {service.icon}
+                {/* Section heading */}
+                <div className="text-center mb-16">
+                    <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="inline-block font-eina text-sm font-medium text-brand-primary uppercase tracking-widest mb-3"
+                    >
+                        What We Do
+                    </motion.span>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.05 }}
+                        className="font-eina font-bold text-4xl md:text-5xl lg:text-6xl text-brand-neutral-900 mb-6 tracking-tight"
+                    >
+                        Our Services
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="font-eina font-light text-lg md:text-xl text-brand-neutral-600 max-w-3xl mx-auto"
+                    >
+                        Comprehensive technology solutions — from renewable energy to advanced security and IT hardware
+                    </motion.p>
                 </div>
-                <h3 className="font-eina font-semibold text-base text-brand-neutral-900 group-hover:text-brand-primary transition-colors">
-                  {service.title}
-                </h3>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <Link
-            href="/services"
-            className="inline-flex items-center text-brand-primary font-eina font-semibold text-lg hover:gap-3 gap-2 transition-all duration-300"
-          >
-            View All Services
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </motion.div>
-      </div>
-    </section>
-  );
+                {/* 6-card grid (3-col on desktop, 2-col on tablet, 1-col on mobile) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {featuredServices.map((service, index) => (
+                        <motion.div
+                            key={service.slug}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.08 }}
+                        >
+                            <Link
+                                href={service.href}
+                                className="
+                                    group relative block p-7 rounded-2xl bg-white
+                                    border border-brand-neutral-200
+                                    hover:border-brand-primary/30
+                                    hover:-translate-y-1
+                                    hover:shadow-[0_8px_30px_rgba(235,83,38,0.12)]
+                                    transition-all duration-300
+                                    overflow-hidden
+                                "
+                            >
+                                {/*
+                                 * Coloured accent bar — slides in from the left on hover.
+                                 * Acts as a visual focus indicator for keyboard users too.
+                                 */}
+                                <span
+                                    className="
+                                        absolute top-0 left-0 h-0.5 w-0
+                                        bg-gradient-to-r from-brand-primary to-brand-accent
+                                        group-hover:w-full transition-all duration-500 ease-out
+                                    "
+                                />
+
+                                {/* Icon */}
+                                <div className="mb-5 w-14 h-14 rounded-xl bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all duration-300">
+                                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d={service.iconPath} />
+                                    </svg>
+                                </div>
+
+                                {/* Title */}
+                                <h3 className="font-eina font-bold text-lg text-brand-neutral-900 group-hover:text-brand-primary transition-colors duration-300 mb-2">
+                                    {service.title}
+                                </h3>
+
+                                {/* Short description */}
+                                <p className="font-eina font-light text-sm text-brand-neutral-500 leading-relaxed mb-5">
+                                    {service.shortDesc}
+                                </p>
+
+                                {/* Learn More arrow */}
+                                <span className="inline-flex items-center gap-1.5 text-brand-primary font-eina font-semibold text-sm group-hover:gap-3 transition-all duration-300">
+                                    Learn More
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </span>
+                            </Link>
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* View All Services CTA */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="text-center mt-14"
+                >
+                    <Link
+                        href="/services"
+                        className="inline-flex items-center gap-2 font-eina font-semibold text-lg px-10 py-4 rounded-lg border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-all duration-300"
+                    >
+                        View All Services
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </Link>
+                </motion.div>
+            </div>
+        </section>
+    );
 }
